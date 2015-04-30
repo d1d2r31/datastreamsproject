@@ -1,15 +1,19 @@
 package com.datastreams.project.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
-//@Aspect
+@Aspect
 public class LogAop {
 	
-	//@Pointcut("execution(* com.datastreams.project.dao.BoardDAOImpl.*(..))")
-	/*private void pointcutMethod(){
+	@Pointcut("execution(* com.datastreams.project.dao.BoardDAOImpl.*(..))")
+	private void pointcutMethod(){
 		
-	}*/
-	//@Around("pointcutMethod()")
+	}
+	@Around("pointcutMethod()")
 	public Object loggerAop(ProceedingJoinPoint joinPoint) throws Throwable{
 		String signatureStr= joinPoint.getSignature().toShortString();
 		System.out.println( signatureStr + "is start. AOP공통기능 시작");
@@ -24,7 +28,7 @@ public class LogAop {
 			System.out.println(signatureStr + "경과시간 : " + (et - st) +"AOP공통기능 종료");
 		}
 	}
-	//@Before("execution(* com.datastreams.project.dao.BoardDAOImpl.*(..))")
+	@Before("execution(* com.datastreams.project.dao.BoardDAOImpl.*(..))")
 	public void beforAdvice(){
 		System.out.println("beforAdvice()");
 	}

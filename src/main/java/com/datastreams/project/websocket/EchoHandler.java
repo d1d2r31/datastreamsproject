@@ -49,7 +49,4 @@ public class EchoHandler extends TextWebSocketHandler {
 	private void log(String logmsg) {
 		System.out.println(new Date() + " : " + logmsg);
 	}
-
-	
-
 }

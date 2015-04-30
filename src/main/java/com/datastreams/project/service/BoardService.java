@@ -22,7 +22,6 @@ public class BoardService {
 	public BoardVO boardDetail(int test) {
 		System.out.println("service boardDetail()");
 			return boardDAO.boardDetail(test);
-		
 	}
 
 	public void upHits(int test) {

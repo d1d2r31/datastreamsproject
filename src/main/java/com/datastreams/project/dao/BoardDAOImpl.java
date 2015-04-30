@@ -54,7 +54,4 @@ public class BoardDAOImpl implements BoardDAO {
 		System.out.println("BoardDAOImpl boardDelete");
 		sqlSession.delete("board.boarddelete", test);
 	}
-
-
-	
 }

@@ -26,6 +26,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 		
+	<!-- Json을 사용하기 위한 설정 -->
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<beans:property name="contentType" value="text/html;charset=UTF-8"></beans:property>
 	</beans:bean> 
@@ -38,6 +39,5 @@
 	<context:component-scan base-package="com.datastreams.project.service" />
 	<context:component-scan base-package="com.datastreams.project.vo" />
 	<context:component-scan base-package="com.datastreams.project.aop" />
-	
 	
 </beans:beans>

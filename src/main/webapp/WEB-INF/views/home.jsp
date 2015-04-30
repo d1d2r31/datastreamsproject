@@ -31,7 +31,7 @@
 </sec:authorize>
 	<sec:authorize access="isAuthenticated()">
 	<%-- <li><a href="<c:url value='/j_spring_security_logout' />">/j_spring_security_logout</a></li> --%>
-	<input type="button"  value="로그아웃" onClick="location.href='<c:url value='/j_spring_security_logout' />'"/>
+	<input id="logout" type="button"  value="로그아웃" onClick="location.href='<c:url value='/j_spring_security_logout' />'"/>
 	</sec:authorize>
 새글 : <input type="text" id="new" value=""/>
 

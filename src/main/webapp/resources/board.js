@@ -134,5 +134,24 @@ $(document).ready(function(){
 		}else{
 			return;
 		}		
+		
+/*		//로그아웃됫을때 세션 해제
+		
+		$("#logout").click(function(){
+			$.ajax({
+				type:"post",
+				url:"/board/logOut",
+				data:{
+					"name" : $("#nickname").val(),
+				},
+					success: function(html){
+						
+						alert("수정완료!")
+						location.href="<c:url value='/j_spring_security_logout' />"
+						$("#boardList").html(html);
+						
+				}
+			});	
+		});*/
 }
 	

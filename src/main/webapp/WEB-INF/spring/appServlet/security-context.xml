@@ -11,8 +11,11 @@
 		<sec:intercept-url pattern="/**" access="permitAll" /> <!-- 누구나 접근 가능 -->
 		<sec:form-login default-target-url="/"/> <!-- 인증돈 사용자만 허용되는 경로에 접근할때 로그인 폼을 보여준다, 로그인 폼에서 아이디/암호를 전송하면 로그인 처리를 한다 -->
 		<sec:logout logout-success-url="/"/> <!-- 로그아웃 처리 -->
+		<sec:session-management>
+			<sec:concurrency-control max-sessions="1" expired-url="http://192.168.2.179:8080/"/>
+		</sec:session-management>
 	</sec:http>
-
+	
 	<sec:authentication-manager>
 		<sec:authentication-provider>
 			<sec:user-service>
@@ -22,5 +25,6 @@
 			</sec:user-service>
 		</sec:authentication-provider>
 	</sec:authentication-manager>
+	
 
 </beans>
