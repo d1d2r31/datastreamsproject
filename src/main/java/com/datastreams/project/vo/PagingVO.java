@@ -37,14 +37,12 @@ public class PagingVO {
 		this.current_page = current_page;
 	}
 	public int getStart_page() {
-			start_page =	(current_page - 1) / 5 * 5 + 1;
 		return start_page;
 	}
 	public void setStart_page(int start_page) {
 		this.start_page = start_page;
 	}
 	public int getEnd_page() {
-			end_page = start_page + 5 - 1;
 		return end_page;
 	}
 	public void setEnd_page(int end_page) {

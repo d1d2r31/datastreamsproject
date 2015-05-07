@@ -33,21 +33,33 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 	int new1 = 0;
+	
 	//리스트 페이지
 	@RequestMapping(value="/boardList", method = RequestMethod.POST )
 	public ModelAndView boardList(PagingVO pagingVO){
 		
 		System.out.println("controller boardList()");
 		mav= new ModelAndView();
-		pagingVO.setBoard_count(boardService.boardCount());
+		
+		// 접근이 이상하거나 , 현재페이지가 0 일경우 현재페이지를 1로 지정해준다.
 		if(pagingVO == null || pagingVO.getCurrent_page()==0){
 			pagingVO.setCurrent_page(1);
-			System.out.println(pagingVO.getCurrent_page());
 		}
+		// DB에 있는 글 갯수를 구해온다
+		pagingVO.setBoard_count(boardService.boardCount());
+		// 페이지 번호 수를 정해주기 위해 --- ( 글전체 갯수 / 한페이지에 보여줄 글의 갯수 ) 를 해준다
+		pagingVO.setPage_count((int)(Math.ceil((double)(pagingVO.getBoard_count())/(double)(pagingVO.getPage_limit()))));
+		// 시작페이지 계산을 해준다 
+		pagingVO.setStart_page(((pagingVO.getCurrent_page() - 1) / pagingVO.getPage_count()) * pagingVO.getPage_count() + 1);
+		// 끝 페이지 계산을 해준다
+		pagingVO.setEnd_page(pagingVO.getStart_page() + pagingVO.getPage_count() - 1);
+		
 		mav.addObject("boardList", boardService.boardList(pagingVO));
-		/*mav.addObject("pagingVO", pagingVO);*/
+		mav.addObject("pagingVO", pagingVO);
 		mav.setViewName("board/boardlist");
-		/*mav.setViewName("jsonView"); */    // JsonView 로 지정해두면 자동으로 json 형식으로 데이터 전달
+		
+		/*JsonView 로 지정해두면 자동으로 json 형식으로 데이터 전달
+		mav.setViewName("jsonView"); */
 		return mav;
 	}
 	//상세보기 페이지
@@ -77,13 +89,16 @@ public class BoardController {
 	@RequestMapping(value="/boardInsert", method= RequestMethod.POST)
 	public ModelAndView boardInsert( @Validated BoardVO boardVO, Errors errors){ 
 	
+		System.out.println("controller boardInsert()"); 
 		if(errors.hasErrors()){
 			return mav;
 		}
-		System.out.println("controller boardInsert()"); //insertCheck가 0 이아니면 작성 값들을 받아와 글 작성기능 실행
 		int insertok=boardService.boardInsert(boardVO);
-		 boardDetail(boardVO.getTest());    //글 등록 완료후 해당글 상세보기를 하기 위해 db에 반영된 객체 사용
-		 // mybatis mapper.xml 에서 쿼리문에 selectKey를 이용하여 db에 저장된 값을 객체에 저장해서 반환
+		
+		 //글 등록 완료후 해당글 상세보기를 하기 위해 db에 반영된 객체 사용
+		// mybatis mapper.xml 에서 쿼리문에 selectKey를 이용하여 db에 저장된 값을 객체에 저장해서 반환
+		boardDetail(boardVO.getTest());   
+		 
 		if(insertok==1){
 			new1++;
 		}
@@ -91,11 +106,11 @@ public class BoardController {
 	}
 	//글삭제 
 	@RequestMapping(value="/boardDelete", method= RequestMethod.POST)
-	public ModelAndView boardDelete(int test){
+	public ModelAndView boardDelete(PagingVO pagingVO, int test){
 		
 			System.out.println("controller boardDelete()");
 			boardService.boardDelete(test);
-			boardList(null);
+			boardList(pagingVO);
 		return mav;
 		
 	}

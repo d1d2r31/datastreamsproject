@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./resources/css/css.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="./resources/sockjs-0.3.4.min.js"></script>
 <script src="./resources/board.js"></script>
 <script src="./resources/chat.js"></script>
-<link rel="stylesheet" type="text/css" href="./resources/css/css.css" />
 <title>Insert title here</title>
 <html>
 <style>
@@ -35,7 +35,6 @@
 	<input id="logout" type="button"  value="로그아웃" onClick="location.href='<c:url value='/j_spring_security_logout' />'"/>
 	</sec:authorize>
 새글 : <input type="text" id="new" value=""/>
-
 <div id="boardList" style="border: 2px solid; width: 500px; margin-bottom: 8px;">
 	<input id="boardListGo" type="button" value="게시판으로 이동" onclick="setInterval(function(){myTimer()},1000);"/> 
 </div>

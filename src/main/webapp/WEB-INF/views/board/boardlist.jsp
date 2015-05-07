@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="./resources/board.js"  ></script>
+<link rel="stylesheet" type="text/css" href="./resources/css/css.css" />
 <style type="text/css">
 .currentPage{
 	font-size: 17px; 
@@ -72,7 +73,6 @@
 				<span class="currentPage" >${num }</span>
 			</c:if>
 		</c:if>
-		
 		<c:if test="${pagingVO.current_page != num }">
 			<c:if test="${pagingVO.end_page == num }">
 				<span class="notCurrentPage endPage" onclick = "movePage(${num})">${num }</span>
@@ -81,7 +81,6 @@
 				<span class="notCurrentPage"  onclick = "movePage(${num})">${num }</span>
 			</c:if>
 		</c:if>
-		
 	</c:forEach>
 	</table>
 	

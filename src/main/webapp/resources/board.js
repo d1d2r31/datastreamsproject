@@ -23,7 +23,9 @@ $(document).ready(function(){
 					type:"post",
 					url:"/board/boardList",
 					/*dataType:"json",*/
-				
+					data:{
+						"page_limit" : 5,
+						},
 					success: function(mydata){
 						$("#boardList").empty();
 						$("#boardList").html(mydata);
@@ -73,7 +75,6 @@ $(document).ready(function(){
 				"insertCheck" :  $("input[name=insertCheck]").val(),
 			},
 				success: function(html){
-					alert($(".sss").attr('id'));
 				$("#boardList").html(html);
 			}
 		});	
@@ -124,6 +125,7 @@ $(document).ready(function(){
 				url:"/board/boardDelete",
 				data:{
 					"test" : i,
+					"page_limit" : 5,
 					},
 					success: function(html){
 						$("#boardList").html(html);
@@ -150,6 +152,4 @@ $(document).ready(function(){
 				}
 			});
 		}
-
-
 	
