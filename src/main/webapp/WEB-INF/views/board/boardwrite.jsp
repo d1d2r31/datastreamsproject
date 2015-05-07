@@ -38,11 +38,11 @@
 			</tr>
 			<tr>
 				<td> 제목 </td>
-				<td> <input name="title" type="text" value="${boardDetail.title}"/><form:errors path="title"/> </td>
+				<td> <input name="title" type="text" value=""/><form:errors path="title" cssClass="sss"/> </td>
 			</tr>
 			<tr>
 				<td> 내용 </td>
-				<td> <input name="content" type="text" value="${boardDetail.content}"/><form:errors path="content"/></td>
+				<td> <input name="content" type="text" value=""/><form:errors path="content"/></td>
 			</tr>
 			<tr >
 				<td colspan="2"> 

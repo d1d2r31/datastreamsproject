@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.datastreams.project.dao.BoardDAO;
 import com.datastreams.project.vo.BoardVO;
+import com.datastreams.project.vo.PagingVO;
 
 @Service
 public class BoardService {
@@ -14,9 +15,9 @@ public class BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
 
-	public List<BoardVO> boardList() {
+	public List<BoardVO> boardList(PagingVO pagingVO) {
 		System.out.println("service boardList()");
-		return boardDAO.boardList();
+		return boardDAO.boardList(pagingVO);
 	}
 
 	public BoardVO boardDetail(int test) {
@@ -42,5 +43,9 @@ public class BoardService {
 	public void boardDelete(int test) {
 		System.out.println("service boardDelete()");
 		boardDAO.boardDelete(test);
+	}
+
+	public int boardCount() {
+		return boardDAO.boardCount();
 	}
 }

@@ -3,7 +3,6 @@ package com.datastreams.project.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,11 +10,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.datastreams.project.service.BoardService;
 import com.datastreams.project.vo.BoardVO;
+import com.datastreams.project.vo.PagingVO;
 
 @Controller
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor={Exception.class}) //트랜잭션 설정
@@ -33,12 +34,18 @@ public class BoardController {
 	}
 	int new1 = 0;
 	//리스트 페이지
-	@RequestMapping(value="/boardList", method = RequestMethod.GET )
-	public ModelAndView boardList(){
+	@RequestMapping(value="/boardList", method = RequestMethod.POST )
+	public ModelAndView boardList(PagingVO pagingVO){
 		
 		System.out.println("controller boardList()");
 		mav= new ModelAndView();
-		mav.addObject("boardList", boardService.boardList());
+		pagingVO.setBoard_count(boardService.boardCount());
+		if(pagingVO == null || pagingVO.getCurrent_page()==0){
+			pagingVO.setCurrent_page(1);
+			System.out.println(pagingVO.getCurrent_page());
+		}
+		mav.addObject("boardList", boardService.boardList(pagingVO));
+		/*mav.addObject("pagingVO", pagingVO);*/
 		mav.setViewName("board/boardlist");
 		/*mav.setViewName("jsonView"); */    // JsonView 로 지정해두면 자동으로 json 형식으로 데이터 전달
 		return mav;
@@ -88,7 +95,7 @@ public class BoardController {
 		
 			System.out.println("controller boardDelete()");
 			boardService.boardDelete(test);
-			boardList();
+			boardList(null);
 		return mav;
 		
 	}

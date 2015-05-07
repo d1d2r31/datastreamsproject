@@ -10,6 +10,7 @@
 <script src="./resources/sockjs-0.3.4.min.js"></script>
 <script src="./resources/board.js"></script>
 <script src="./resources/chat.js"></script>
+<link rel="stylesheet" type="text/css" href="./resources/css/css.css" />
 <title>Insert title here</title>
 <html>
 <style>
@@ -27,7 +28,7 @@
 
 <P id="demo" ></P>
 <sec:authorize access="isAuthenticated()">
-<sec:authentication property="name"/>님 환영합니다.
+<sec:authentication property="name"/>님 환영합니다. 
 </sec:authorize>
 	<sec:authorize access="isAuthenticated()">
 	<%-- <li><a href="<c:url value='/j_spring_security_logout' />">/j_spring_security_logout</a></li> --%>

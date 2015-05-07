@@ -20,11 +20,12 @@
 $(document).ready(function(){        
 		$("#boardListGo").click(function(){
 				$.ajax({
-					type:"get",
+					type:"post",
 					url:"/board/boardList",
 					/*dataType:"json",*/
 				
 					success: function(mydata){
+						$("#boardList").empty();
 						$("#boardList").html(mydata);
 						
 						/*for(var i=0;i<=mydata.boardList.length;i++) {        //Json 타입 값 뿌려주기
@@ -72,9 +73,8 @@ $(document).ready(function(){
 				"insertCheck" :  $("input[name=insertCheck]").val(),
 			},
 				success: function(html){
-					alert("작성완료!")
+					alert($(".sss").attr('id'));
 				$("#boardList").html(html);
-					
 			}
 		});	
 	});
@@ -127,31 +127,29 @@ $(document).ready(function(){
 					},
 					success: function(html){
 						$("#boardList").html(html);
-						
 				}			
 		});
 			
 		}else{
 			return;
 		}		
+	}
+	
 		
-/*		//로그아웃됫을때 세션 해제
-		
-		$("#logout").click(function(){
+		function movePage(pageNum){
 			$.ajax({
 				type:"post",
-				url:"/board/logOut",
+				url:"/board/boardList",
 				data:{
-					"name" : $("#nickname").val(),
+					"current_page": pageNum,
+					"page_limit" :5,
 				},
-					success: function(html){
-						
-						alert("수정완료!")
-						location.href="<c:url value='/j_spring_security_logout' />"
-						$("#boardList").html(html);
-						
+			
+				success: function(html){
+					$("#boardList").html(html);
 				}
-			});	
-		});*/
-}
+			});
+		}
+
+
 	

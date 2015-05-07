@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.datastreams.project.vo.BoardVO;
+import com.datastreams.project.vo.PagingVO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -19,9 +20,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> boardList() {
+	public List<BoardVO> boardList(PagingVO pagingVO) {
 		System.out.println("BoardDAOImpl boardList()");
-		return sqlSession.selectList("board.boardlist");
+		return sqlSession.selectList("board.boardlist", pagingVO);
 	}
 
 	@Override
@@ -53,5 +54,11 @@ public class BoardDAOImpl implements BoardDAO {
 	public void boardDelete(int test) {
 		System.out.println("BoardDAOImpl boardDelete");
 		sqlSession.delete("board.boarddelete", test);
+	}
+
+	@Override
+	public int boardCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("board.boardcount");
 	}
 }
