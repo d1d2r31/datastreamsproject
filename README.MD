@@ -1,5 +1,9 @@
 (게시판 접속주소)
-http://192.168.2.179:8080/     <- security ( id : admin , pw : 1234 )
+http://192.168.2.179:8080/     
+
+security ( id : admin   , pw : 1234 )
+	 ( id : manager , pw : 1234 )
+	 ( id : user    , pw : 1234 )
 
 
 - MVC 기반 ( view - > controller - > service - > dao - > daoimpl -> oracle 
@@ -8,7 +12,6 @@ http://192.168.2.179:8080/     <- security ( id : admin , pw : 1234 )
 - WebSocket 을 이용하여 채팅방 구현
 - @Validate 를 이용한 유효성 검사 (server 단에서)
 - 새로운 글 알림 구현
-
 - maven을 이용해 라이브러리 다운
 - gradle 프로젝트도 생성함
 - 한글 인코딩 처리 //(web.xml 에 설정)
